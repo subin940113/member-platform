@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: member-platform
+  profiles:
+    default: local
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: ${SERVER_PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET}
+  access-token-validity-seconds: ${JWT_ACCESS_SECONDS:900}
+  refresh-token-validity-seconds: ${JWT_REFRESH_SECONDS:604800}
+
+app:
+  crypto:
+    secret: ${APP_CRYPTO_SECRET}
+    phone-pepper: ${APP_CRYPTO_PHONE_PEPPER}
+  auth:
+    login:
+      max-failures-before-lock: ${AUTH_LOGIN_MAX_FAILURES:5}
+      lock-duration: ${AUTH_LOGIN_LOCK_DURATION:30m}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
+  register:
+    admission:
+      max-concurrent: ${REGISTER_ADMISSION_MAX_CONCURRENT:100}
+      token-ttl: ${REGISTER_ADMISSION_TOKEN_TTL:60s}
+    idempotency:
+      ttl: ${REGISTER_IDEMPOTENCY_TTL:10m}

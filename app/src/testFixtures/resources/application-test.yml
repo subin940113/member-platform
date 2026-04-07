@@ -1,0 +1,40 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  task:
+    scheduling:
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+jwt:
+  secret: "01234567890123456789012345678901"
+  access-token-validity-seconds: 900
+  refresh-token-validity-seconds: 604800
+
+app:
+  crypto:
+    secret: "01234567890123456789012345678901"
+    phone-pepper: "test-phone-pepper-01234567890123456789012345678901"
+  auth:
+    login:
+      max-failures-before-lock: 5
+      lock-duration: 30m
+  register:
+    admission:
+      max-concurrent: 100
+      token-ttl: 60s
+    idempotency:
+      ttl: 10m

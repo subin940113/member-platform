@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/member}
+    username: ${SPRING_DATASOURCE_USERNAME:member}
+    password: ${SPRING_DATASOURCE_PASSWORD:member}
+    driver-class-name: org.postgresql.Driver
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+jwt:
+  secret: ${JWT_SECRET:01234567890123456789012345678901}
+
+app:
+  crypto:
+    secret: ${APP_CRYPTO_SECRET:01234567890123456789012345678901}
+    phone-pepper: ${APP_CRYPTO_PHONE_PEPPER:local-dev-phone-pepper-must-be-at-least-32-chars-long}
+
+logging:
+  level:
+    org.hibernate.SQL: debug
