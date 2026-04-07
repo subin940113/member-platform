@@ -1,0 +1,24 @@
+@host = http://localhost:8080
+@accessToken = eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlYWJjM2YwOS1iYTEyLTRmMGUtYjUyYi01MjIwOTZjNDQ3NDEiLCJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwidWlkIjoyLCJ0eXAiOiJhY2Nlc3MiLCJpYXQiOjE3NzU0NDQwMTEsImV4cCI6MTc3NTQ0NDkxMSwicm9sZSI6IlVTRVIiLCJyb2xlcyI6WyJVU0VSIl19.UYt3HRldlVBL5c8WlOBQ-mFKrqY1c2Uvz4YtxHJTgDA
+@refreshToken = eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJjMDQ3M2IwMC1jZjZiLTQ2OGItOGE3YS1kZmU5YWMwZTAzMDIiLCJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwidWlkIjoxLCJ0eXAiOiJyZWZyZXNoIiwiaWF0IjoxNzc1NDQzMzA0LCJleHAiOjE3NzYwNDgxMDQsInJvbGUiOiJVU0VSIiwicm9sZXMiOlsiVVNFUiJdfQ.1hzUsoyes1Uc_qIyiFhZN48IZax-MJqyuuRCxmmIdhQ
+
+### AuthController — 로그인(액세스, 리프레시 토큰 발급)
+POST {{host}}/api/v1/auth/token
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Aa1!aaaa"
+}
+
+### AuthController — 리프레시 토큰으로 액세스와 리프레시 갱신
+PUT {{host}}/api/v1/auth/token
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### AuthController — 로그아웃(활성 리프레시 토큰 전부 폐기)
+DELETE {{host}}/api/v1/auth/token
+Authorization: Bearer {{accessToken}}

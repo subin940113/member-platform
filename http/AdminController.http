@@ -1,0 +1,14 @@
+@host = http://localhost:8080
+@accessToken = eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjlmNDk5NS0wYmJmLTQwNTYtYmIyZC1mOTU0NGJhNmYyYjQiLCJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwidWlkIjoyLCJ0eXAiOiJhY2Nlc3MiLCJpYXQiOjE3NzU0NDQxMTQsImV4cCI6MTc3NTQ0NTAxNCwicm9sZSI6IkFETUlOIiwicm9sZXMiOlsiQURNSU4iXX0.KkD0WsJmgajCT5W2tozSe4ZoEEBhCxCTjagaS63xGF8
+
+### AdminController — 회원 목록
+GET {{host}}/api/v1/admin/members?page=0&size=20
+Authorization: Bearer {{accessToken}}
+
+### AdminController — 회원 상세
+GET {{host}}/api/v1/admin/members/1
+Authorization: Bearer {{accessToken}}
+
+### AdminController — 회원 PII
+GET {{host}}/api/v1/admin/members/2/pii
+Authorization: Bearer {{accessToken}}

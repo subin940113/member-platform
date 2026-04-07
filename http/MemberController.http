@@ -1,0 +1,42 @@
+@host = http://localhost:8080
+@accessToken = eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjlmNDk5NS0wYmJmLTQwNTYtYmIyZC1mOTU0NGJhNmYyYjQiLCJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwidWlkIjoyLCJ0eXAiOiJhY2Nlc3MiLCJpYXQiOjE3NzU0NDQxMTQsImV4cCI6MTc3NTQ0NTAxNCwicm9sZSI6IkFETUlOIiwicm9sZXMiOlsiQURNSU4iXX0.KkD0WsJmgajCT5W2tozSe4ZoEEBhCxCTjagaS63xGF8
+
+### 1) 입장 토큰 발급 (admission)
+POST {{host}}/api/v1/members/admission
+Accept: application/json
+
+### 응답 예: { "success": true, "data": { "admissionToken": "<uuid>", "expiresInSeconds": 60 }, ... }
+### 아래 변수에 발급받은 admissionToken 값을 넣어 사용하세요.
+@admissionToken = <paste-admission-token-here>
+
+### 2) 회원가입 — 201 Created, Location 헤더, 응답 본문 없음
+### Idempotency-Key 는 요청마다 고유한 값(예: UUID)으로 보냅니다.
+POST {{host}}/api/v1/members
+Content-Type: application/json
+Admission-Token: {{admissionToken}}
+Idempotency-Key: 00000000-0000-4000-8000-000000000001
+
+{
+  "email": "user@example.com",
+  "name": "홍길동",
+  "password": "Aa1!aaaa",
+  "phone": "01012345678"
+}
+
+### 3) 본인 정보 조회
+GET {{host}}/api/v1/members/me
+Authorization: Bearer {{accessToken}}
+
+### 4) 본인 정보 수정
+PATCH {{host}}/api/v1/members/me
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "phone": "01098765432",
+  "name": "홍길동"
+}
+
+### 5) 회원 탈퇴
+DELETE {{host}}/api/v1/members/me
+Authorization: Bearer {{accessToken}}
